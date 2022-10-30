@@ -1,0 +1,9 @@
+driver/chromedriver
+config.ini
+users.ini
+mylog.log
+src/__pycache__/database_up.cpython-310.pyc
+app/src/__pycache__/__init__.cpython-310.pyc
+app/src/__pycache__/back.cpython-310.pyc
+app/src/__pycache__/database_up.cpython-310.pyc
+app/src/__pycache__/sel.cpython-310.pyc
