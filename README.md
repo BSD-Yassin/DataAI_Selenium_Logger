@@ -11,17 +11,20 @@ This project creates a Dockerimage of everything and returns a python dockerized
 
 ```bash
 .
+├── app
+│   ├── main.py # Main file for iteration
+│   └── src 
+│       ├── back.py ## Config loader using ConfigParser
+│       ├── database_loader.py ## Database connection and writing
+│       ├── __init__.py  ## Submodule index
+│       └── sel.py  ## Selenium custom instance & functions 
 ├── config.ini ## Configuration, DB, captcha and proxies
+├── Dockerfile ## Dockerfile for app containerization
 ├── driver
-│   └── chromedriver ## chromedriver binary
-├── main.py ## main file for repetition
-├── mylog.log ## log file for any error from the script
-├── src ## Submodules folder
-│   ├── back.py ## Config loader using ConfigParser
-│   ├── captcha.py ## Captcha Resolver using 
-│   ├── database_up.py ## Database connection and writing
-│   ├── __init__.py ## Submodule index
-│   └── sel.py ## Selenium custom instance & functions  
+│   └── chromedriver  ## chromedriver binary
+├── mylog.log ## log file for any error from the script 
+├── README.md
+├── requirements.txt
 └── users.ini ## Credentials outside of the python files, can be edited
 ```
 

@@ -3,30 +3,44 @@ This is the selenium configuration loading. It depends on back.py for every twea
 In order, the module calls for every config file, proxy and user before launching an instance for undetected module.
 This module then runs the simple login by XPATH. It detects if a captcha is required and calls for captcha_resolve from the captcha.py
 """
-
 import time
 import undetected_chromedriver as uc
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 # from solveRecaptcha import solveRecaptcha
+import socket
 from src.back import Configuration
 from src.back import custom_ChromeOptions
 
 class Uc_instance():
-    def __init__(self):
+    def __init__(self, success=False):
         
         self.logger = Configuration.get_log()
         self.configuration = Configuration.config_loader()
         self.user = Configuration.users_loader()
         self.options = custom_ChromeOptions()
+        self.api = Configuration.get_api()
+        self.ip = self.get_ip() 
         self.driver = uc.Chrome(options=self.options, driver_executable_path='driver/chromedriver')
+        self.success = success
+    
+    def get_ip(self):
+        try: 
+            IP_proxy = socket.gethostbyname('google.com')
+            print("IP Address for this session is:" + IP_proxy)
+            return IP_proxy    
+        except:
+            self.logger.error(f'{time.asctime(time.localtime(time.time()))} - Something went wrong during the UcLaunch generation.')
+            print('Something went wrong during the proxy resolution')
 
     def session_uc(self):
         try:
             print("Launching the browser...")
             self.driver.get('https://www.data.ai/account/login')
         except:
+            failure = True
+            return failure
             self.logger.error(f'{time.asctime(time.localtime(time.time()))} - Something went wrong during the UcLaunch generation.')
             print('Something went wrong while loading the website')
 
@@ -45,6 +59,7 @@ class Uc_instance():
             
             test_log = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, get_started_button)))
             if test_log:
+                self.success = True
                 print('Managed to log in ! No captcha !')
         except:
             self.logger.error(f'{time.asctime(time.localtime(time.time()))} - Error - Something went wrong while trying to login. - Actual page is {self.driver.current_url} - Login used is {self.user["username"]}')
@@ -53,7 +68,7 @@ class Uc_instance():
         
 """     def solver():
         result = solveRecaptcha(
-            "6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-",
+            "self.api['2captcha_api']",
             driver.current_url)
 
         code = result['code']

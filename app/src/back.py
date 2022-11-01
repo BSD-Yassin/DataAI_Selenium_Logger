@@ -47,6 +47,15 @@ class Configuration():
         current_user_dict = dict(config.items(current_user_choice))
         return current_user_dict
     
+    def get_api():
+        """
+        loads the api key configuration
+        """
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        api_conf = config.items('API_KEY')
+        return api_conf
+        
     def db_loader():
         """
         loads the db configuration
@@ -76,7 +85,6 @@ def custom_ChromeOptions():
         options.add_argument("--start-maximized")
         options.add_argument("--headless")
         # options.add_argument('--proxy-server=%s' % proxy)
-        print('Using %s as a proxy' % proxy)
         return options
         
     except :
