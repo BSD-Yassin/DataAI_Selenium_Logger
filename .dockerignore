@@ -1,4 +1,8 @@
+.git
+.gitignore
 mylog.log
 README.md
 .gitignore
-Dockerfile
+Dockerfile*
+docker-compose*
+app/src/__pycache__/*

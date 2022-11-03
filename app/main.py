@@ -19,6 +19,5 @@ if __name__ == '__main__':
         
         db_instance.write_db(instance.user['username'],
                             instance.user['password'],
-                            instance.ip,
                             failed=instance.success)
 

@@ -73,6 +73,10 @@ def custom_ChromeOptions():
         proxy_creds = dict(config.items('PROXY'))    
         proxy = proxy_creds['proxy']
 
+        from selenium.webdriver.common.proxy import Proxy
+        Proxy.httpProxy = proxy
+        Proxy.socks_Proxy = proxy
+        Proxy.ssl_Proxy = proxy
         print("Setting up the undetected session")
         options = uc.ChromeOptions()
         options.add_argument('--enable-javascript')
@@ -84,7 +88,7 @@ def custom_ChromeOptions():
         options.add_argument("--disable-plugins-discovery")
         options.add_argument("--start-maximized")
         options.add_argument("--headless")
-        # options.add_argument('--proxy-server=%s' % proxy)
+        options.add_argument("--proxy=%s" % proxy)
         return options
         
     except :

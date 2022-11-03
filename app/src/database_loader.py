@@ -28,7 +28,7 @@ class DB_connect():
         except Error as e:
             self.logger.error(f'{time.asctime(time.localtime(time.time()))} - Something went wrong during the DB authentification.')
     
-    def write_db(self, email, password, proxy_ip, failed):
+    def write_db(self, email, password, failed):
         """
         Change values        
         """
